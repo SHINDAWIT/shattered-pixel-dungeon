@@ -24,7 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis;
-import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Gas;
+import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 
 public class ParalyticGas extends Gas {
 	
@@ -36,5 +37,10 @@ public class ParalyticGas extends Gas {
 	@Override
 	protected void Gas_evolve(Char ch) {
 		Buff.prolong( ch, Paralysis.class, Paralysis.DURATION);
+	}
+	
+	@Override
+	protected void Use_emitter(BlobEmitter emitter) {
+		emitter.pour( Speck.factory(Speck.PARALYSIS), 0.4f );
 	}
 }

@@ -4,7 +4,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 
 public abstract class Gas extends Blob {
@@ -25,19 +24,19 @@ public abstract class Gas extends Blob {
 			}
 		}
 	}
-	
-	@Override
-	public void use( BlobEmitter emitter ) {
-		super.use( emitter );
-
-		emitter.pour( Speck.factory(Speck.STENCH), 0.4f );
-	}
 
 	@Override
 	public String tileDesc() {
 		return Messages.get(this, "desc");
 	}
+	
+	@Override
+	public void use( BlobEmitter emitter ) {
+		super.use( emitter );
+		
+		Use_emitter(emitter);
+	}
 
 	protected abstract void Gas_evolve(Char ch);
-	
+	protected abstract void Use_emitter(BlobEmitter emitter);
 }
