@@ -43,16 +43,7 @@ public class GuardianTrap extends Trap {
 	@Override
 	public void activate() {
 
-		for (Mob mob : Dungeon.level.mobs) {
-			mob.beckon( pos );
-		}
-
-		if (Dungeon.level.heroFOV[pos]) {
-			GLog.w( Messages.get(this, "alarm") );
-			CellEmitter.center(pos).start( Speck.factory(Speck.SCREAM), 0.3f, 3 );
-		}
-
-		Sample.INSTANCE.play( Assets.Sounds.ALERT );
+		extracted();
 
 		for (int i = 0; i < (Dungeon.depth - 5)/5; i++){
 			Guardian guardian = new Guardian();
@@ -64,6 +55,19 @@ public class GuardianTrap extends Trap {
 			}
 		}
 
+	}
+
+	private void extracted() {
+		for (Mob mob : Dungeon.level.mobs) {
+			mob.beckon( pos );
+		}
+
+		if (Dungeon.level.heroFOV[pos]) {
+			GLog.w( Messages.get(this, "alarm") );
+			CellEmitter.center(pos).start( Speck.factory(Speck.SCREAM), 0.3f, 3 );
+		}
+
+		Sample.INSTANCE.play( Assets.Sounds.ALERT );
 	}
 
 	public static class Guardian extends Statue {
