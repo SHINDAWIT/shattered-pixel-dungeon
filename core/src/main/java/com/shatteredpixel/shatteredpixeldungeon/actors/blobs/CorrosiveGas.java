@@ -21,17 +21,14 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 
-import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corrosion;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
 
-public class CorrosiveGas extends Blob {
+public class CorrosiveGas extends Gas {
 
 	//FIXME should have strength per-cell
 	private int strength = 0;
@@ -41,24 +38,11 @@ public class CorrosiveGas extends Blob {
 
 	@Override
 	protected void evolve() {
-		super.evolve();
-
 		if (volume == 0){
 			strength = 0;
 			source = null;
 		} else {
-			Char ch;
-			int cell;
-
-			for (int i = area.left; i < area.right; i++){
-				for (int j = area.top; j < area.bottom; j++){
-					cell = i + j*Dungeon.level.width();
-					if (cur[cell] > 0 && (ch = Actor.findChar( cell )) != null) {
-						if (!ch.isImmune(this.getClass()))
-							Buff.affect(ch, Corrosion.class).set(2f, strength, source);
-					}
-				}
-			}
+			super.evolve();
 		}
 	}
 
@@ -92,14 +76,12 @@ public class CorrosiveGas extends Blob {
 	}
 
 	@Override
-	public void use( BlobEmitter emitter ) {
-		super.use( emitter );
-
-		emitter.pour( Speck.factory(Speck.CORROSION), 0.4f );
+	protected void Gas_evolve(Char ch) {
+		Buff.affect(ch, Corrosion.class).set(2f, strength, source);
 	}
 
 	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
+	protected void Use_emitter(BlobEmitter emitter) {
+		emitter.pour( Speck.factory(Speck.CORROSION), 0.4f );
 	}
 }
