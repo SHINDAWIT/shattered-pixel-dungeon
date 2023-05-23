@@ -97,9 +97,4 @@ public class WaterOfHealth extends WellWater {
 		super.use( emitter );
 		emitter.start( Speck.factory( Speck.HEALING ), 0.5f, 0 );
 	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
-	}
 }

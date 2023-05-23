@@ -26,7 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 
-public class StormCloud extends Blob {
+public class StormCloud extends Nature{
 	
 	@Override
 	protected void evolve() {
@@ -47,16 +47,10 @@ public class StormCloud extends Blob {
 			}
 		}
 	}
-	
+
 	@Override
 	public void use( BlobEmitter emitter ) {
 		super.use( emitter );
 		emitter.pour( Speck.factory( Speck.STORM ), 0.4f );
 	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
-	}
-	
 }

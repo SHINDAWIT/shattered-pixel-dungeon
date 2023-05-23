@@ -32,7 +32,7 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-public abstract class WellWater extends Blob {
+public abstract class WellWater extends Nature {
 
 	@Override
 	protected void evolve() {

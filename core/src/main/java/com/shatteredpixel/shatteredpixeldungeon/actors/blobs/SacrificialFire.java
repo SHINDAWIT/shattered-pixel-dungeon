@@ -49,7 +49,7 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-public class SacrificialFire extends Blob {
+public class SacrificialFire extends Nature {
 
 	BlobEmitter curEmitter;
 
@@ -114,11 +114,6 @@ public class SacrificialFire extends Blob {
 		//a bit brittle, assumes only one tile of sacrificial fire can exist per floor
 		int max = 6 + Dungeon.depth * 4;
 		curEmitter.pour( SacrificialParticle.FACTORY, 0.01f + ((volume / (float)max) * 0.09f) );
-	}
-
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
 	}
 
 	private static final String BONUS_SPAWNS = "bonus_spawns";
