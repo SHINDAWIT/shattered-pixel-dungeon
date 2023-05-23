@@ -31,7 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 
-public class Web extends Blob {
+public class Web extends Nature {
 
 	{
 		//acts before the hero, to ensure terrain is adjusted correctly
@@ -99,10 +99,5 @@ public class Web extends Blob {
 				l.flamable[i] = l.flamable[i] || cur[i] > 0;
 			}
 		}
-	}
-
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
 	}
 }

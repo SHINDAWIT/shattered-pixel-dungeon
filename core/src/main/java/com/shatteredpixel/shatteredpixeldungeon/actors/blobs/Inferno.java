@@ -24,10 +24,9 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 
-public class Inferno extends Blob {
+public class Inferno extends Nature {
 	
 	@Override
 	protected void evolve() {
@@ -46,8 +45,7 @@ public class Inferno extends Blob {
 				cell = i + j * Dungeon.level.width();
 				if (cur[cell] > 0) {
 					
-					if (fire != null)   fire.clear(cell);
-					if (freeze != null) freeze.clear(cell);
+					clearFireFreeze(fire, freeze, cell);
 					
 					if (bliz != null && bliz.volume > 0 && bliz.cur[cell] > 0){
 						bliz.clear(cell);
@@ -89,10 +87,4 @@ public class Inferno extends Blob {
 		
 		emitter.pour( Speck.factory( Speck.INFERNO, true ), 0.4f );
 	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
-	}
-	
 }

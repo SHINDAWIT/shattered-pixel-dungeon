@@ -97,9 +97,4 @@ public class WaterOfAwareness extends WellWater {
 		super.use( emitter );
 		emitter.pour( Speck.factory( Speck.QUESTION ), 0.3f );
 	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
-	}
 }
