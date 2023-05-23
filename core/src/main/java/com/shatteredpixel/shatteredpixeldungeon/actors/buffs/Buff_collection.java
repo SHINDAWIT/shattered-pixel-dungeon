@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Buff_collection implements Buff_Observer{
     private LinkedHashSet<Buff> buffs = new LinkedHashSet<>();
 
+
     @Override
     public void put(String key, Bundle bundle){
         bundle.put(key,buffs);
