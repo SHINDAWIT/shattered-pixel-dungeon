@@ -1778,7 +1778,7 @@ public class Hero extends Char {
 		boolean added = super.add( buff );
 
 		if (sprite != null && added) {
-			String msg = buff.heroMessage();
+			String msg = Messages.get(buff,"heromsg").isEmpty() ? null : Messages.get(buff,"heromsg");
 			if (msg != null){
 				GLog.w(msg);
 			}
