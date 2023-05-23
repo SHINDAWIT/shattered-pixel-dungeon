@@ -80,7 +80,6 @@ import com.watabou.utils.Random;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
 
 public abstract class Char extends Actor {
 	
@@ -111,8 +110,9 @@ public abstract class Char extends Actor {
 	
 	public boolean[] fieldOfView = null;
 	
-	private LinkedHashSet<Buff> buffs = new LinkedHashSet<>();
-	
+//	private LinkedHashSet<Buff> buffs = new LinkedHashSet<>();
+	private Buff_Observer buff_collection;
+
 	@Override
 	protected boolean act() {
 		if (fieldOfView == null || fieldOfView.length != Dungeon.level.length()){
@@ -245,7 +245,9 @@ public abstract class Char extends Actor {
 		bundle.put( POS, pos );
 		bundle.put( TAG_HP, HP );
 		bundle.put( TAG_HT, HT );
-		bundle.put( BUFFS, buffs );
+//		bundle.put( BUFFS, buffs );
+		buff_collection.put(BUFFS, bundle);
+
 	}
 	
 	@Override
@@ -770,14 +772,14 @@ public abstract class Char extends Actor {
 	}
 	
 	public synchronized LinkedHashSet<Buff> buffs() {
-		return new LinkedHashSet<>(buffs);
+		return buff_collection.get();
 	}
 	
 	@SuppressWarnings("unchecked")
 	//returns all buffs assignable from the given buff class
 	public synchronized <T extends Buff> HashSet<T> buffs( Class<T> c ) {
 		HashSet<T> filtered = new HashSet<>();
-		for (Buff b : buffs) {
+		for (Buff b : buff_collection.get()) {
 			if (c.isInstance( b )) {
 				filtered.add( (T)b );
 			}
@@ -788,7 +790,7 @@ public abstract class Char extends Actor {
 	@SuppressWarnings("unchecked")
 	//returns an instance of the specific buff class, if it exists. Not just assignable
 	public synchronized  <T extends Buff> T buff( Class<T> c ) {
-		for (Buff b : buffs) {
+		for (Buff b : buff_collection.get()) {
 			if (b.getClass() == c) {
 				return (T)b;
 			}
@@ -798,7 +800,7 @@ public abstract class Char extends Actor {
 
 	public synchronized boolean isCharmedBy( Char ch ) {
 		int chID = ch.id();
-		for (Buff b : buffs) {
+		for (Buff b : buff_collection.get()) {
 			if (b instanceof Charm && ((Charm)b).object == chID) {
 				return true;
 			}
@@ -820,7 +822,7 @@ public abstract class Char extends Actor {
 			return false; //can't add buffs while frozen and game is loaded
 		}
 
-		buffs.add( buff );
+		buff_collection.add( buff );
 		if (Actor.chars().contains(this)) Actor.add( buff );
 
 		if (sprite != null && buff.announced) {
@@ -844,7 +846,8 @@ public abstract class Char extends Actor {
 	
 	public synchronized boolean remove( Buff buff ) {
 		
-		buffs.remove( buff );
+//		buffs.remove( buff );
+		buff_collection.remove( buff );
 		Actor.remove( buff );
 
 		return true;
@@ -858,11 +861,11 @@ public abstract class Char extends Actor {
 	
 	@Override
 	protected synchronized void onRemove() {
-		buffs.stream().collect(Collectors.toList()).forEach(buff -> {buff.detach();});
+		buff_collection.detach();
 	}
 	
 	public synchronized void updateSpriteState() {
-		for (Buff buff:buffs) {
+		for (Buff buff:buff_collection.get()) {
 			buff.fx( true );
 		}
 	}
