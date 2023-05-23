@@ -111,7 +111,7 @@ public abstract class Char extends Actor {
 	public boolean[] fieldOfView = null;
 	
 //	private LinkedHashSet<Buff> buffs = new LinkedHashSet<>();
-	private Buff_Observer buff_collection;
+	private Buff_Observer buff_collection = new Buff_collection();
 
 	@Override
 	protected boolean act() {
