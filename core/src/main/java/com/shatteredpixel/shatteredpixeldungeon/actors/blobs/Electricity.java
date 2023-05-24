@@ -37,7 +37,7 @@ import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
-public class Electricity extends Blob {
+public class Electricity extends Nature {
 	
 	{
 		//acts after mobs, to give them a chance to resist paralysis
@@ -119,11 +119,6 @@ public class Electricity extends Blob {
 	public void use( BlobEmitter emitter ) {
 		super.use( emitter );
 		emitter.start( SparkParticle.FACTORY, 0.05f, 0 );
-	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
 	}
 	
 }
