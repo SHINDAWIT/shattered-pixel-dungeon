@@ -28,7 +28,7 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.GooSprite;
 
-public class GooWarn extends Blob {
+public class GooWarn extends Nature {
 
 	//cosmetic blob, used to warn noobs that goo's pump up should, infact, be avoided.
 
@@ -61,11 +61,6 @@ public class GooWarn extends Blob {
 	public void use( BlobEmitter emitter ) {
 		super.use( emitter );
 		emitter.pour(GooSprite.GooParticle.FACTORY, 0.03f );
-	}
-
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
 	}
 }
 

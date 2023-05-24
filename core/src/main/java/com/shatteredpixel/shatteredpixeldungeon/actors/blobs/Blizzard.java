@@ -24,9 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 
-public class Blizzard extends Blob {
+public class Blizzard extends Nature {
 	
 	@Override
 	protected void evolve() {
@@ -43,9 +42,8 @@ public class Blizzard extends Blob {
 			for (int j = area.top; j < area.bottom; j++) {
 				cell = i + j * Dungeon.level.width();
 				if (cur[cell] > 0) {
-					
-					if (fire != null)   fire.clear(cell);
-					if (freeze != null) freeze.clear(cell);
+
+					clearFireFreeze(fire, freeze, cell);
 					
 					if (inf != null && inf.volume > 0 && inf.cur[cell] > 0){
 						inf.clear(cell);
@@ -66,11 +64,5 @@ public class Blizzard extends Blob {
 		super.use( emitter );
 		emitter.pour( Speck.factory( Speck.BLIZZARD, true ), 0.4f );
 	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
-	}
-	
-	
+
 }
