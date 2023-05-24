@@ -22,7 +22,6 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.food;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 
 public class Pasty extends Food {
 	//TODO: implement fun stuff for other holidays
@@ -51,15 +50,5 @@ public class Pasty extends Food {
             default:
                 throw new IllegalArgumentException("Invalid holiday value: " + holiday);
         }
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-    }
-
-    @Override
-    protected void satisfy(Hero hero) {
-        super.satisfy(hero);
     }
 }
