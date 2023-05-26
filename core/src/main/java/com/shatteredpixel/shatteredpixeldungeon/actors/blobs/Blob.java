@@ -276,9 +276,9 @@ public class Blob extends Actor {
 
 	public static int volumeAt( int cell, Class<? extends Blob> type){
 		Blob gas = Dungeon.level.blobs.get( type );
-		boolean isGasEmpty = gas == null || gas.volume == 0;
+		boolean GasEmpty = gas == null || gas.volume == 0;
 
-		if (isGasEmpty) {
+		if (GasEmpty) {
 			return 0;
 		} else {
 			return gas.cur[cell];
