@@ -32,9 +32,8 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter;
 import com.shatteredpixel.shatteredpixeldungeon.effects.particles.SnowParticle;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.MagicalFireRoom;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 
-public class Freezing extends Blob {
+public class Freezing extends Nature {
 	
 	@Override
 	protected void evolve() {
@@ -93,11 +92,6 @@ public class Freezing extends Blob {
 	public void use( BlobEmitter emitter ) {
 		super.use( emitter );
 		emitter.start( SnowParticle.FACTORY, 0.05f, 0 );
-	}
-	
-	@Override
-	public String tileDesc() {
-		return Messages.get(this, "desc");
 	}
 	
 	//legacy functionality from before this was a proper blob. Returns true if this cell is visible
