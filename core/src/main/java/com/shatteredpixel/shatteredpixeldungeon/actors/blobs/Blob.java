@@ -98,7 +98,7 @@ public class Blob extends Actor {
 		if (bundle.contains( CUR )) {
 			int length = bundle.getInt(LENGTH);
 			cur = new int[length];
-			off = new int[length];
+			off = new int[cur.length];
 
 			int[] data = bundle.getIntArray(CUR);
 			int start = bundle.getInt(START);
