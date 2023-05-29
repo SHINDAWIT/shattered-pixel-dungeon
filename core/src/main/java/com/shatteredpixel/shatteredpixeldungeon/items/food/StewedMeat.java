@@ -44,7 +44,11 @@ public class StewedMeat extends Food {
 			inputs = new Class[]{MysteryMeat.class};
 			inQuantity = new int[]{quantityIntValue};
 
-			cost = quantityIntValue;
+			if(quantityIntValue == 3) {
+				cost = 2;
+			} else {
+				cost = quantityIntValue;
+			}
 
 			output = StewedMeat.class;
 			outQuantity = quantityIntValue;
