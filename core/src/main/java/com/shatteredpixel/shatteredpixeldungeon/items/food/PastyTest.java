@@ -8,6 +8,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 class PastyTest {
     /**
@@ -25,6 +27,14 @@ class PastyTest {
     Pasty pastyXmas = Mockito.mock(PastyXMAS.class);
     Pasty pastyNone = Mockito.mock(PastyNONE.class);
     Pasty pastyHween = Mockito.mock(PastyHWEEN.class);
+
+    @Test
+    void newPastyError() {
+        assertAll("Creating Pasty",
+                () -> assertThrows(NullPointerException.class, () -> new Pasty(), "Expected NullPointerException"),
+                () -> assertThrows(ExceptionInInitializerError.class, () -> new Pasty(), "Expected ExceptionInInitializerError")
+        );
+    }
 
     @Test
     void createInstance() {
